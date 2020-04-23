@@ -79,7 +79,7 @@ jobs:
         timeout-minutes: 40
         with:
           command: test
-          args: --all --all-features --no-fail-fast -- --nocapture
+          args: -j 1 --all --all-features --no-fail-fast -- --nocapture
 
       - name: Generate coverage file
         if: matrix.version == 'stable' && (github.ref == 'master' || github.event_name == 'pull_request')
