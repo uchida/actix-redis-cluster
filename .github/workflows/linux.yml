@@ -16,11 +16,20 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      redis:
-        image: redis:5.0.7
+      redis-blackout:
+        image: idein/redis-blackout
         ports:
-          - 6379:6379
-        options: --entrypoint redis-server
+          - "6379:6379"
+          - "7379:7379"
+          - "8474:8474"
+      redis-cluster:
+        image: grokzen/redis-cluster
+        env:
+          IP: "127.0.0.1"
+          SENTINEL: false
+          STANDALONE: false
+        ports:
+          - "7000-7005:7000-7005"
 
     steps:
       - uses: actions/checkout@master
